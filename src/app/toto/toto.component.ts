@@ -1,9 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {CurrencyPipe, LowerCasePipe, NgClass, PercentPipe, UpperCasePipe} from "@angular/common";
-import EventEmitter from "node:events";
+import {
+    AsyncPipe,
+    CurrencyPipe, JsonPipe,
+    LowerCasePipe,
+    NgClass,
+    NgForOf,
+    NgIf,
+    PercentPipe,
+    UpperCasePipe
+} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {ExponentialStrenghtPipe} from "../pipes/exponential-strenght.pipe";
 import {ServiceCoursService} from "../service/service-cours.service";
+import {Observable} from "rxjs";
+
 
 @Component({
     selector: 'app-toto',
@@ -17,13 +27,18 @@ import {ServiceCoursService} from "../service/service-cours.service";
         LowerCasePipe,
         CurrencyPipe,
         PercentPipe,
-        ExponentialStrenghtPipe
+        ExponentialStrenghtPipe,
+        NgForOf,
+        AsyncPipe,
+        NgIf,
+        JsonPipe
     ],
     styleUrl: './toto.component.scss'
 })
 export class TotoComponent implements OnInit{
 
     public valeurService:string = '';
+    public valeurMock: any[] = [];
 
     // @Output() colorChange = new EventEmitter();
 
@@ -32,6 +47,13 @@ export class TotoComponent implements OnInit{
 
     ngOnInit() {
         this.valeurService = this.service.variableDuService;
+    }
+
+    getUsers() {
+        this.service.getUsers().subscribe( (data) => {
+            this.valeurMock = data;
+            console.log(this.valeurMock);
+        })
     }
 
     // public changeColor() {

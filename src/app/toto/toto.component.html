@@ -12,3 +12,12 @@
 
 
 <p>{{valeurService}}</p>
+
+
+<button (click)="getUsers()">Test Mock API</button>
+
+<ul>
+  <li *ngFor="let user of valeurMock">
+    <strong>{{ user.name }}</strong> - {{ user.email }}
+  </li>
+</ul>
